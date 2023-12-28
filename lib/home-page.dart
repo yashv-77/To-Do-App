@@ -9,37 +9,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  // list of todo tasks
+  List todoList = [
+    ["This is todo list ",false],
+    ["To make the april fool",false]
+  ];
+
+  // checkbox was tapped
+  void checkedBoxChanged(bool? value, int index){
+  setState(() {
+    todoList[index][1] = !todoList[index][1];
+  });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
-        title: Text("To Do App",
+        title: const Text("TO DO",
         style: TextStyle(color: Colors.black,
-        fontWeight: FontWeight.w600),
+        fontWeight: FontWeight.w500,fontSize: 35),
         ),
         centerTitle: true,
         backgroundColor: Colors.purple[100],
-
       ),
-      body: ListView(
-        children: [
-          TodoTile(
-            taskname: "The task Name will be here",
-            taskCompleted: true,
-            onChanged: (p0)=>{},
-          ),
-          TodoTile(
-            taskname: "The task Name will be here",
-            taskCompleted: false,
-            onChanged: (p0)=>{},
-          ),
-          TodoTile(
-            taskname: "The task Name will be here",
-            taskCompleted: true,
-            onChanged: (p0)=>{},
-          )
-        ],
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Icon(Icons.add),
+      ),
+
+      body: ListView.builder(
+        itemCount: todoList.length,
+        itemBuilder: (context,index){
+          return TodoTile(
+              taskname: todoList[index][0],
+              taskCompleted: todoList[index][1] ,
+              onChanged: (value) => checkedBoxChanged(value, index),
+          );
+        }
       ),
     );
+
   }
 }
