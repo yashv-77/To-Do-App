@@ -1,23 +1,38 @@
 import 'package:flutter/material.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile({super.key});
+
+  final String taskname;
+  final bool taskCompleted;
+  Function(bool?)? onChanged;
+
+  TodoTile({super.key,
+    required this.taskname,
+    required this.taskCompleted,
+    required this.onChanged
+  });
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(   // Adding Padding to container
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(20.0),
       child: Container(
-
-        child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Text('A To Do Tile appear here',
-          style: TextStyle(fontSize: 16),),
-        ),
 
         decoration: BoxDecoration(
             color: Colors.purple[50],
             borderRadius: BorderRadius.circular(20)
+        ),
+
+        child: Padding(
+          padding: EdgeInsets.all(30),
+          child: Row(
+            children: [
+              Checkbox(value: taskCompleted, onChanged: onChanged),
+              Text(taskname,
+              style: TextStyle(fontSize: 16),),
+            ],
+          ),
         ),
       ),
     );

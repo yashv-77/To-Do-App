@@ -23,7 +23,21 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: [
-          TodoTile()
+          TodoTile(
+            taskname: "The task Name will be here",
+            taskCompleted: true,
+            onChanged: (p0)=>{},
+          ),
+          TodoTile(
+            taskname: "The task Name will be here",
+            taskCompleted: false,
+            onChanged: (p0)=>{},
+          ),
+          TodoTile(
+            taskname: "The task Name will be here",
+            taskCompleted: true,
+            onChanged: (p0)=>{},
+          )
         ],
       ),
     );
